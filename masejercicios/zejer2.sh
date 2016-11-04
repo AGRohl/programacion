@@ -21,11 +21,8 @@ do
     find . -type f -name $variable 2>/dev/null
 		if [ $variable ]
 			then 
-				echo "$variable existe"
-			else
-				echo "$variable no existe"
+				echo "$variable existe" >> /tmp/archivos.txt
 		fi
-		read f
-	
 done
+
 exit 0	
