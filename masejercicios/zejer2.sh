@@ -24,5 +24,7 @@ do
 				echo "$variable existe" >> /tmp/archivos.txt
 		fi
 done
-
+zenity --text-info \
+			 --title="Estos archivos existen" \
+			 --filename="/tmp/archivos.txt" 
 exit 0	
