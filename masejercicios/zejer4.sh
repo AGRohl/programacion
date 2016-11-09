@@ -10,8 +10,8 @@ fichero=tempfile
 # 1- Recibimos un parámetro.
 
 argumento=`zenity --forms --title="zejer4" \
-    --text="Introduce nombre de directorio" \
-    --add-entry="Nombre directorio" 2> /dev/null`
+    --text="Introduce nombre de archivo" \
+    --add-entry="Nombre archivo" 2> /dev/null`
 
 
 # 2- Saber que es un fichero existente
@@ -20,13 +20,13 @@ if [ -f $argumento ]
 	then
             chmod ug+x $argumento
             ls -l $argumento >> "$fichero"
-						zenity --text-info --title="fichero" \
-									 --filename="$fichero"
-						rm -f $fichero
+            zenity --text-info --title="fichero" \
+                   --filename="$fichero"
+            rm -f $fichero
 	else
-		zenity --info \
-					 --text="No es un fichero válido"
-		exit 2
+            zenity --info \
+		   --text="No es un fichero válido"
+            exit 2
 fi
 
 exit 0
