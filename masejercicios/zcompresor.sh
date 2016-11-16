@@ -43,12 +43,13 @@ function Preparaficheros(){
 function Comprime(){
     Preparaficheros
 #     Buscaruta
-    echo "$nombre" "$ficheros"
-    read s
-    destino="$nombre"
-    tar czvf "$destino" "$ficheros"
-    ls "$destino"
-
+    destino="$ruta/$nombre"
+    for i in $ficheros
+    do
+        tar rvf "$destino" "$i"
+    done
+    tar czvf "$destino.tgz" "$destino"
+    rm "$destino"
 }
 function Descomprime(){
 
@@ -96,7 +97,7 @@ do
 #             fi
             
             nombre=`zenity --entry --text="introduce un nombre para el fichero comprimido"`
-            nombre="$nombre.tar.tgz"
+            nombre="$nombre.tar"
             zenity --info --text="$ficheros $nombre"
             Comprime
             ;;

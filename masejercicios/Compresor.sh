@@ -21,12 +21,8 @@ opcion="K"
 
 function Preparaficheros(){
     ficheros=$(echo "$ficheros" | sed "s/ /\_/g")
-    echo "$ficheros"
-    read s
     ficheros=$(echo "$ficheros" | sed "s/,/ /g")
-    echo "$ficheros"
-    read s
-#     return $ficheros
+    
 }
 
 # function Buscaruta(){
@@ -48,18 +44,20 @@ function Preparaficheros(){
 function Comprime(){
     Preparaficheros
 #     Buscaruta
-    echo "$ruta/$nombre" "$ficheros"
-    read s
     destino="$ruta/$nombre"
-    tar czvf "$destino" "$ficheros"
-    ls "$destino"
+    for i in $ficheros
+    do
+        tar rvf "$destino" "$i"
+    done
+    tar czvf "$destino.tgz" "$destino"
+    rm "$destino"
+    
 
 }
 function Descomprime(){
 #     Preparaficheros
 #     Buscaruta
     tar xvfz "$ruta/$ficheros.tar.tgz"
-
 }
 
 
@@ -91,13 +89,13 @@ do
             read ficheros
             echo 'Introduce la ruta:'
             read ruta
-            if [ "$ruta" = "" ]
+            if [ "$ruta" == "" ]
             then 
                 ruta="."
             fi
             echo 'Introduce un nombre de archivo:'
             read nombre
-            nombre="$nombre.tar.tgz"
+            nombre="$nombre.tar"
             Comprime
             ;;
         D | d )
@@ -105,6 +103,10 @@ do
             read ficheros
             echo 'Introduce la ruta:'
             read ruta
+            if [ "$ruta" == "" ]
+            then 
+                ruta="."
+            fi
             Descomprime
             ;;
         S | s )
